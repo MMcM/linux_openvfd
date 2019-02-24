@@ -314,7 +314,7 @@ static size_t fd628_write_data(const unsigned char *_data, size_t length)
 		transpose8rS64(trans, trans);
 		memset(dev->wbuf, 0x00, sizeof(dev->wbuf));
 		for (i = 0; i < ram_grid_count; i++)
-			dev->wbuf[i] = trans[i+1];
+			dev->wbuf[i] = trans[i+1] | ((trans[i+1] >> 7) & 1); // copy dots: 80 -> 01.
 	}
 
 	switch (dtb->display.controller) {
